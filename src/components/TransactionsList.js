@@ -1,6 +1,23 @@
 import React from 'react'
+import Transaction from './Transaction'
 
-const TransactionsList = () => {
+const TransactionsList = (props) => {
+
+  const allTransactions = props.transactions.map(transaction => <Transaction transaction={transaction} key={'transaction-' + transaction.id}/>)
+
+  // // creating a filter for transactions based on active category
+  // const allTransactions = () => {
+  //   props.transactions.map(transaction => {
+  //     if (props.activeCategory === 'All') {
+  //   <Transaction transaction={transaction} key={'transaction-' + transaction.id}/>
+  //   } else if (props.activeCategory === transaction.category) {
+  //     <Transaction transaction={transaction} key={'transaction-' + transaction.id}/>
+  //   }
+  // }
+
+
+  //
+
 
   return (
     <table className="ui celled striped padded table">
@@ -28,7 +45,7 @@ const TransactionsList = () => {
           </th>
         </tr>
 
-        {/* "... your code here..." */}
+        {allTransactions}
 
       </tbody>
     </table>
