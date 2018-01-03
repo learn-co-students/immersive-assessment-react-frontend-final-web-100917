@@ -14,6 +14,7 @@ const CategorySelector = (props) => {
           key={ i }
           checked={ checked }
           category={ category }
+          handleSelection = {props.handleSelection}
         />
       )
     }
