@@ -1,30 +1,50 @@
-import React, { Component } from 'react'
-import TransactionsList from './TransactionsList'
-import CategorySelector from './CategorySelector'
-import {transactions} from '../transactionsData'
+import React, { Component } from "react";
+import TransactionsList from "./TransactionsList";
+import CategorySelector from "./CategorySelector";
 
 class AccountContainer extends Component {
   constructor() {
-    super()
-    //... your code here
+    super();
+    this.state = {
+      transactions: [],
+      activeCategory: "All"
+    };
   }
 
-  handleChange() {
-    //... your code here
+  componentDidMount() {
+    fetch("https://boiling-brook-94902.herokuapp.com/transactions")
+      .then(res => res.json())
+      .then(trans => this.setState({ transactions: trans }));
   }
+
+  handleChange = event => {
+    console.log(event.target.value);
+    this.setState({ activeCategory: event.target.value });
+  };
+
+  filteredTransactions = () => {
+    const allTransactions = this.state.transactions.slice();
+    if (this.state.activeCategory === "All") {
+      return allTransactions;
+    }
+    return allTransactions.filter(
+      trans => trans.category === this.state.activeCategory
+    );
+  };
 
   render() {
-    console.log(transactions)
+    console.log(this.filteredTransactions);
     return (
       <div className="ui grid container">
+        <CategorySelector
+          activeCategory={this.state.activeCategory}
+          handleChange={this.handleChange}
+        />
 
-        <CategorySelector />
-
-        <TransactionsList />
-
+        <TransactionsList transactions={this.filteredTransactions()} />
       </div>
-    )
+    );
   }
 }
 
-export default AccountContainer
+export default AccountContainer;
