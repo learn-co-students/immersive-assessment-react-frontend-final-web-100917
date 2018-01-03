@@ -1,22 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-const CategoryField = (props) => {
-  const { category, checked } = props
+const CategoryField = props => {
+  const { category, checked } = props;
 
   return (
     <div className=" four wide field">
       <div className="ui radio checkbox">
-
         <input
           type="radio"
           name="category"
-          checked={ checked }
+          checked={checked}
+          onChange={e => {
+            props.handleChange(category);
+          }}
         />
-        <label>{ category }</label>
-
+        <label>{category}</label>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryField
+export default CategoryField;
