@@ -3,6 +3,8 @@ import AccountContainer from './AccountContainer'
 
 
 class App extends Component {
+
+
   render() {
     return (
       <div className="ui raised segment">
@@ -10,7 +12,7 @@ class App extends Component {
           <h2>The Royal Bank of Flatiron</h2>
         </div>
 
-        <AccountContainer />
+        <AccountContainer/>
 
       </div>
     )
