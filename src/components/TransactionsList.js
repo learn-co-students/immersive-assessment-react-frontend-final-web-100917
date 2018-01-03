@@ -1,7 +1,22 @@
 import React from 'react'
+import Transaction from './Transaction'
 
-const TransactionsList = () => {
+const TransactionsList = (props) => {
 
+  if (props.transList.activeCategory === "") {
+      const filteredList = props.transList.transaction.map }
+  else {
+    const filteredList = filterList
+    }
+  
+
+  const filterList = props.transList.transaction.filter(trans => trans.category === props.transList.activeCategory)
+  console.log(filterList)
+
+
+  const postedAt = filterList.map((t, index)=>{
+      return ( <Transaction trans={t} category={props.transList.activeCategory}/> )
+  })
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -27,9 +42,7 @@ const TransactionsList = () => {
             </h3>
           </th>
         </tr>
-
-        {/* "... your code here..." */}
-
+        {postedAt}
       </tbody>
     </table>
   )

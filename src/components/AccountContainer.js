@@ -4,23 +4,37 @@ import CategorySelector from './CategorySelector'
 import {transactions} from '../transactionsData'
 
 class AccountContainer extends Component {
-  constructor() {
-    super()
-    //... your code here
-  }
 
-  handleChange() {
-    //... your code here
+
+    componentDidMount() {
+      fetch(`https://boiling-brook-94902.herokuapp.com/transactions`)
+      .then((data)=>data.json())
+      .then(data=>this.setState({
+        transaction: data
+      }))
+    }
+
+    state = {
+      transaction: [],
+      activeCategory: ""
+    }
+
+
+  handleChange = (cat) => {
+    const label = cat.category
+    this.setState({
+      activeCategory: label
+    })
   }
 
   render() {
-    console.log(transactions)
+    console.log(this.state.activeCategory)
     return (
       <div className="ui grid container">
 
-        <CategorySelector />
+        <CategorySelector handleChange={this.handleChange} activeCategory={this.state.activeCategory}/>
 
-        <TransactionsList />
+        <TransactionsList transList={this.state}/>
 
       </div>
     )
